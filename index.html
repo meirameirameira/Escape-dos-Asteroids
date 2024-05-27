@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Game</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Nome ============================================================ ⤵️⤵️⤵️ -->
+    <h1
+      style="
+        position: fixed;
+        top: 0%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        font-size: 40px;
+        font-family: Silkscreen, sans-serif;
+      "
+    >
+      ESCAPE DOS ASTEROIDS
+    </h1>
+    <!-- Canvas ============================================================ ⤵️⤵️⤵️ -->
+    <div
+      class="jogo"
+      style="
+        position: fixed;
+        top: 34%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      "
+    >
+      <canvas
+        id="minha-tela"
+        width="800"
+        height="400"
+        class=""
+        style="
+          background-image: url(/Imagens/bg.jpg);
+          background-repeat: no-repeat;
+          background-size: cover;
+          border-radius: 10px;
+          box-shadow: 2px 7px 10px #6e6e6e;
+        "
+      ></canvas>
+    </div>
+    <!-- Imagem Controles ============================================================ ⤵️⤵️⤵️ -->
+    <img
+      src="./Imagens/Controles/full.png"
+      alt=""
+      style="
+        position: fixed;
+        top: 60%;
+        left: 50%;
+        transform: translate(-50%, 0);
+      "
+    />
+    <!-- Script ============================================================ ⤵️⤵️⤵️ -->
+    <script>
+      var canvas = document.getElementById("minha-tela");
+      var ctx = canvas.getContext("2d");
+      ctx.font = "20px Arial";
+      // Event listener para teclas ============================================================ ⤵️⤵️⤵️ //
+      window.addEventListener("keydown", start);
+      window.addEventListener("keydown", pressionaTecla);
+      // START ============================================================ ⤵️⤵️⤵️ //
+      var jogoIniciado = false;
+      ctx.fillStyle = "#FFF";
+      ctx.font = "bold 25px Silkscreen";
+      ctx.textAlign = "center";
+      ctx.fillText("APERTE 'ESPAÇO' PARA COMEÇAR", canvas.width / 2, 200);
+      function start(tecla) {
+        if (!jogoIniciado && tecla.keyCode === 32) {
+          jogoIniciado = true;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          requestAnimationFrame(gameloop);
+          aumentarPontosComTempo();
+          desenharQ();
+        }
+        // Recarregar página
+        if (tecla.keyCode === 82) {
+          location.reload();
+        }
+      }
+      // Controles ============================================================ ⤵️⤵️⤵️ //
+      var move = 30;
+      function pressionaTecla(tecla) {
+        if (jogoIniciado) {
+          // ⬆️ Seta ou W
+          if (tecla.keyCode == 38 || tecla.keyCode == 87) {
+            if (y_player > 0) {
+              y_player = y_player - move;
+              playerImg = playerImgCima;
+            }
+          }
+          // ⬇️ Seta ou S
+          if (tecla.keyCode == 40 || tecla.keyCode == 83) {
+            if (y_player < canvas.height - tamanho_player) {
+              y_player = y_player + move;
+              playerImg = playerImgBaixo;
+            }
+          }
+          // ➡️ Seta o D
+          if (tecla.keyCode == 39 || tecla.keyCode == 68) {
+            if (x_player < canvas.width - tamanho_player) {
+              x_player = x_player + move;
+              playerImg = playerImgDireita;
+            }
+          }
+          // ⬅️ Seta ou A
+          if (tecla.keyCode == 37 || tecla.keyCode == 65) {
+            if (x_player > 0) {
+              x_player = x_player - move;
+              playerImg = playerImgEsquerda;
+            }
+          }
+        }
+      }
+      // Desenho dos Objetos ============================================================ ⤵️⤵️⤵️ //
+      var playerImgCima = new Image();
+      playerImgCima.src = "Imagens/Spaceship/spaceship - cima.png";
+      var playerImgBaixo = new Image();
+      playerImgBaixo.src = "Imagens/Spaceship/spaceship - baixo.png";
+      var playerImgEsquerda = new Image();
+      playerImgEsquerda.src = "Imagens/Spaceship/spaceship - esquerda.png";
+      var playerImgDireita = new Image();
+      playerImgDireita.src = "Imagens/Spaceship/spaceship - direita.png";
+      var playerImg = playerImgCima;
+      //
+      var asteroidImg = new Image();
+      asteroidImg.src = "Imagens/asteroid.png";
+      //
+      var x_player = 370;
+      var y_player = 330;
+      var tamanho_player = 50;
+      //
+      var x_asteroid = 370;
+      var y_asteroid = 0;
+      var tamanho_asteroid = 70;
+      function desenharQuadrado() {
+        ctx.clearRect(0, 0, 800, 400);
+        // Player
+        ctx.drawImage(
+          playerImg,
+          x_player,
+          y_player,
+          tamanho_player,
+          tamanho_player
+        );
+        // Asteroid
+        ctx.drawImage(
+          asteroidImg,
+          x_asteroid,
+          y_asteroid,
+          tamanho_asteroid,
+          tamanho_asteroid
+        );
+        // Mostrar Pontos
+        ctx.fillStyle = "#FFF";
+        ctx.font = "bold 20px Silkscreen";
+        ctx.textAlign = "left";
+        ctx.fillText("Pontos: " + pontos, 20, 30);
+        // Mostrar Vidas
+        ctx.fillStyle = "#F00";
+        ctx.font = "bold 20px Silkscreen";
+        ctx.textAlign = "left";
+        ctx.fillText("VIDAS: " + vidas, 20, 53);
+      }
+      // Gameloop ============================================================ ⤵️⤵️⤵️ //
+      function gameloop() {
+        desenharQuadrado(x_player, y_player);
+        if (posicaoAsteroid) {
+          desenharQuadrado(x_asteroid, y_asteroid);
+          detectarColisao();
+        }
+      }
+      // Pontos ============================================================ ⤵️⤵️⤵️ //
+      var pontos = 0;
+      var intervaloPontos;
+      function aumentarPontosComTempo() {
+        intervaloPontos = setInterval(function () {
+          pontos++;
+          console.log("Pontos: " + pontos);
+          //Dificuldade
+          if (pontos > 30) fps = 1.2;
+          if (pontos > 50) fps = 1.5;
+          if (pontos > 70) fps = 1.7;
+          if (pontos > 90) fps = 2;
+          if (pontos > 170) fps = 3;
+          if (pontos > 250) fps = 3.5;
+          if (pontos > 350) fps = 4;
+          if (pontos > 500) fps = 5;
+        }, 150);
+      }
+      // Posicao Asteroid Aleatoria ============================================================ ⤵️⤵️⤵️ //
+      var fps = 1;
+      var posicaoAsteroid = true;
+      function desenharQ() {
+        setTimeout(function () {
+          requestAnimationFrame(desenharQ);
+          ctx.clearRect(
+            x_asteroid,
+            y_asteroid,
+            tamanho_asteroid,
+            tamanho_asteroid
+          );
+          if (posicaoAsteroid) {
+            x_asteroid = Math.floor(Math.random() * canvas.width);
+            y_asteroid = Math.floor(Math.random() * canvas.height);
+          }
+        }, 1000 / fps);
+      }
+      // Colisao ============================================================ ⤵️⤵️⤵️ //
+      var vidas = 3;
+      var ultimaColisao = 0;
+      function detectarColisao() {
+        var tAtual = new Date().getTime();
+        if (
+          x_player + tamanho_player > x_asteroid &&
+          x_player < x_asteroid + tamanho_asteroid &&
+          y_player + tamanho_player > y_asteroid &&
+          y_player < y_asteroid + tamanho_asteroid &&
+          tAtual - ultimaColisao > 2000
+        ) {
+          vidas--;
+          ultimaColisao = tAtual;
+          console.log("Vidas: " + vidas);
+        }
+        if (vidas == 0) {
+          desenharQuadrado();
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          //
+          ctx.fillStyle = "#F00";
+          ctx.font = "bold 40px Silkscreen";
+          ctx.textAlign = "center";
+          ctx.fillText("GAME OVER", canvas.width / 2, canvas.height / 2);
+          //
+          ctx.fillStyle = "#FFF";
+          ctx.font = "bold 20px Silkscreen";
+          ctx.textAlign = "center";
+          ctx.fillText("PONTOS: " + pontos, canvas.width / 2, 230);
+          //
+          ctx.fillStyle = "#FFF";
+          ctx.font = "20px Silkscreen";
+          ctx.textAlign = "center";
+          ctx.fillText(
+            "APERTE 'R' PARA TENTAR NOVAMENTE",
+            canvas.width / 2,
+            40
+          );
+          //
+          posicaoAsteroid = false;
+          clearInterval(intervaloPontos);
+        } else {
+          requestAnimationFrame(gameloop);
+        }
+      }
+    </script>
+  </body>
+</html>
