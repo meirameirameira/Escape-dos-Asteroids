@@ -10,20 +10,22 @@
 
   Para ilustrar melhor o game, a figura “Objetos em um instante qualquer” indica o placar e um exemplo natural das posições da nave e do asteroide, esse representado por um quadrado azul.
 
-  ![image](https://github.com/meirameirameira/Escape-dos-Asteroids/assets/132008120/a289788d-72cc-4d98-bae4-8df64bc25554)
-
-  
+  <p align="center">
+    <img src="https://github.com/meirameirameira/Escape-dos-Asteroids/assets/132008120/a289788d-72cc-4d98-bae4-8df64bc25554">
+  </p>
 
 Por outro lado, é importante determinar como mostrar ao usuário o instante do final do jogo, ou seja, o Game Over, que pode ser visto pela figura “Objetos no momento do Game Over”.
 
-  ![image](https://github.com/meirameirameira/Escape-dos-Asteroids/assets/132008120/a827775d-8e95-4a8a-8351-06be7e5eb27a)
-
+  <p align="center">
+    <img src="https://github.com/meirameirameira/Escape-dos-Asteroids/assets/132008120/a827775d-8e95-4a8a-8351-06be7e5eb27a">
+  </p>
 
 
 Em termos de interação com o usuário, o game deve controlar a nave de acordo com o pressionamento das teclas que representam as setas para a esquerda, para a direta, para cima e para baixo, indicando, por meio de uma imagem diferente, o seu real sentido e direção, conforme a figura “Interação com o teclado”.
 
-  ![image](https://github.com/meirameirameira/Escape-dos-Asteroids/assets/132008120/69d9dcb3-9f9d-4c8f-9bee-df993560cac8)
-
+  <p align="center">
+    <img src="https://github.com/meirameirameira/Escape-dos-Asteroids/assets/132008120/69d9dcb3-9f9d-4c8f-9bee-df993560cac8">
+  </p>
 
 Como desenvolver um game não é fácil e a ideia se materializa de forma gradual, haverá algumas orientações técnicas adicionais que devem ser utilizadas como regras do jogo, conforme itens a seguir.
 
@@ -39,7 +41,8 @@ Para desenvolver essa atividade, você deverá seguir algumas regras, dentre ela
 
 ## Critérios de avaliação
 
-  ![image](https://github.com/meirameirameira/Escape-dos-Asteroids/assets/132008120/46d630df-06c0-491a-aeb0-b6703bf44a09)
-
+  <p align="center">
+    <img src="https://github.com/meirameirameira/Escape-dos-Asteroids/assets/132008120/46d630df-06c0-491a-aeb0-b6703bf44a09">
+  </p>
 
   O objetivo desta atividade é apenas praticar o conteúdo, mas você pode sofisticar ainda mais seu jogo e mudar um pouco sua mecânica. No entanto, você não deve utilizar códigos de terceiros ou frameworks em hipótese alguma. Um pré-requisito importante é fazer o jogo em javascript nativo "from scratch".
