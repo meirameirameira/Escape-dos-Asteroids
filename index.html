@@ -58,7 +58,7 @@
         height="400"
         class=""
         style="
-          background-image: url(/Imagens/bg.jpg);
+          background-image: url(./Imagens/bg.jpg);
           background-repeat: no-repeat;
           background-size: cover;
           border-radius: 10px;
@@ -86,11 +86,15 @@
       window.addEventListener("keydown", start);
       window.addEventListener("keydown", pressionaTecla);
       // START ============================================================ ⤵️⤵️⤵️ //
-      var jogoIniciado = false;
       ctx.fillStyle = "#FFF";
       ctx.font = "bold 25px Silkscreen";
       ctx.textAlign = "center";
       ctx.fillText("APERTE 'ESPAÇO' PARA COMEÇAR", canvas.width / 2, 200);
+      var jogoIniciado = false;
+      // ctx.fillStyle = "#FFF";
+      // ctx.font = "bold 25px Silkscreen";
+      // ctx.textAlign = "center";
+      // ctx.fillText("APERTE 'ESPAÇO' PARA COMEÇAR", canvas.width / 2, 200);
       function start(tecla) {
         if (!jogoIniciado && tecla.keyCode === 32) {
           jogoIniciado = true;
@@ -160,6 +164,7 @@
       var x_asteroid = 370;
       var y_asteroid = 0;
       var tamanho_asteroid = 90;
+      //
       function desenharQuadrado() {
         ctx.clearRect(0, 0, 800, 400);
         // Player
