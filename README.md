@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="https://github.com/meirameirameira/Escape-dos-Asteroids/assets/132008120/f59261a2-eb23-4383-9935-d6385d23c3ba">
+  </p>
+
 # Que comecem os jogos! - Desenvolvimento de game: Fugindo de Asteroides
   
   Todos os conhecimentos adquiridos até agora nas tecnologias HTML, CSS e Javascript serão extremamente úteis para este desafio: desenvolver um game! Então, mãos à obra para compreender a mecânica dos games, fugindo de asteroides!
