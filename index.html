@@ -11,8 +11,8 @@
       rel="stylesheet"
     />
   </head>
-  <body>
-    <!-- Nome ============================================================ ⤵️⤵️⤵️ -->
+  <body style="font-family: Silkscreen, sans-serif">
+    <!-- Titulo ============================================================ ⤵️⤵️⤵️ -->
     <h1
       style="
         position: fixed;
@@ -20,11 +20,28 @@
         left: 50%;
         transform: translate(-50%, 0%);
         font-size: 40px;
-        font-family: Silkscreen, sans-serif;
       "
     >
       ESCAPE DOS ASTEROIDS
     </h1>
+    <!-- Regras ============================================================ ⤵️⤵️⤵️ -->
+    <div
+      style="
+        position: fixed;
+        top: 22%;
+        left: 14%;
+        transform: translate(-50%, 0%);
+        font-size: 17px;
+      "
+    >
+      <h3>REGRAS</h3>
+      <ul>
+        <li>Mais tempo vivo = mais pontos.</li>
+        <li>Colidir com um Asteroid: -1 vida.</li>
+        <li>Ficar parado por 2 segundos: -10 pontos.</li>
+        <li>O jogo fica mais difícil com o tempo.</li>
+      </ul>
+    </div>
     <!-- Canvas ============================================================ ⤵️⤵️⤵️ -->
     <div
       class="jogo"
@@ -64,7 +81,7 @@
     <script>
       var canvas = document.getElementById("minha-tela");
       var ctx = canvas.getContext("2d");
-      ctx.font = "20px Arial";
+      ctx.font = "20px Silkscreen";
       // Event listener para teclas ============================================================ ⤵️⤵️⤵️ //
       window.addEventListener("keydown", start);
       window.addEventListener("keydown", pressionaTecla);
@@ -91,6 +108,7 @@
       var move = 30;
       function pressionaTecla(tecla) {
         if (jogoIniciado) {
+          ultimoTempoTeclaPressionada = new Date().getTime();
           // ⬆️ Seta ou W
           if (tecla.keyCode == 38 || tecla.keyCode == 87) {
             if (y_player > 0) {
@@ -137,11 +155,11 @@
       //
       var x_player = 370;
       var y_player = 330;
-      var tamanho_player = 50;
+      var tamanho_player = 60;
       //
       var x_asteroid = 370;
       var y_asteroid = 0;
-      var tamanho_asteroid = 70;
+      var tamanho_asteroid = 90;
       function desenharQuadrado() {
         ctx.clearRect(0, 0, 800, 400);
         // Player
@@ -177,6 +195,7 @@
         if (posicaoAsteroid) {
           desenharQuadrado(x_asteroid, y_asteroid);
           detectarColisao();
+          verificarInatividade();
         }
       }
       // Pontos ============================================================ ⤵️⤵️⤵️ //
@@ -196,6 +215,16 @@
           if (pontos > 350) fps = 4;
           if (pontos > 500) fps = 5;
         }, 150);
+      }
+      // Punicao Pontos ============================================================ ⤵️⤵️⤵️ //
+      var ultimoTempoTeclaPressionada = 0;
+      function verificarInatividade() {
+        var tAtual = new Date().getTime();
+        if (tAtual - ultimoTempoTeclaPressionada > 2000) {
+          pontos -= 10;
+          console.log("Você ficou parado por muito tempo -10 pontos");
+          ultimoTempoTeclaPressionada = tAtual;
+        }
       }
       // Posicao Asteroid Aleatoria ============================================================ ⤵️⤵️⤵️ //
       var fps = 1;
