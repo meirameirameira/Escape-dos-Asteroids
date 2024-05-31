@@ -86,6 +86,7 @@
       window.addEventListener("keydown", start);
       window.addEventListener("keydown", pressionaTecla);
 
+      // START ============================================================ ⤵️⤵️⤵️ //
       document.fonts.load('25px "Silkscreen"').then(drawInitialText);
       function drawInitialText() {
         ctx.fillStyle = "#FFF";
@@ -93,7 +94,6 @@
         ctx.textAlign = "center";
         ctx.fillText("APERTE 'ESPAÇO' PARA COMEÇAR", canvas.width / 2, 200);
       }
-      // START ============================================================ ⤵️⤵️⤵️ //
       var jogoIniciado = false;
       function start(tecla) {
         if (!jogoIniciado && tecla.keyCode === 32) {
@@ -162,7 +162,7 @@
       var tamanho_player = 60;
       //
       var x_asteroid = 370;
-      var y_asteroid = 0;
+      var y_asteroid = -100;
       var tamanho_asteroid = 90;
       //
       function desenharQuadrado() {
@@ -211,14 +211,14 @@
           pontos++;
           console.log("Pontos: " + pontos);
           //Dificuldade
-          if (pontos > 30) fps = 1.2;
-          if (pontos > 50) fps = 1.5;
-          if (pontos > 70) fps = 1.7;
-          if (pontos > 90) fps = 2;
-          if (pontos > 170) fps = 3;
-          if (pontos > 250) fps = 3.5;
-          if (pontos > 350) fps = 4;
-          if (pontos > 500) fps = 5;
+          if (pontos > 30) fps = 1.3;
+          if (pontos > 80) fps = 1.6;
+          if (pontos > 130) fps = 1.9;
+          if (pontos > 200) fps = 2.2;
+          if (pontos > 280) fps = 2.5;
+          if (pontos > 380) fps = 2.8;
+          if (pontos > 500) fps = 3.1;
+          if (pontos > 600) fps = 3.4;
         }, 150);
       }
       // Punicao Pontos ============================================================ ⤵️⤵️⤵️ //
@@ -235,19 +235,18 @@
       var fps = 1;
       var posicaoAsteroid = true;
       function desenharQ() {
-        setTimeout(function () {
-          requestAnimationFrame(desenharQ);
+        requestAnimationFrame(desenharQ);
+        y_asteroid += fps;
+        if (y_asteroid > 400) {
+          x_asteroid = Math.floor(Math.random() * canvas.width);
           ctx.clearRect(
             x_asteroid,
             y_asteroid,
             tamanho_asteroid,
             tamanho_asteroid
           );
-          if (posicaoAsteroid) {
-            x_asteroid = Math.floor(Math.random() * canvas.width);
-            y_asteroid = Math.floor(Math.random() * canvas.height);
-          }
-        }, 1000 / fps);
+          y_asteroid = -100;
+        }
       }
       // Colisao ============================================================ ⤵️⤵️⤵️ //
       var vidas = 3;
