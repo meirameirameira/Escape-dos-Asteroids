@@ -161,7 +161,7 @@
       var y_player = 330;
       var tamanho_player = 60;
       //
-      var x_asteroid = 370;
+      var x_asteroid = 0;
       var y_asteroid = -100;
       var tamanho_asteroid = 90;
       //
@@ -234,6 +234,7 @@
       // Posicao Asteroid Aleatoria ============================================================ ⤵️⤵️⤵️ //
       var fps = 1;
       var posicaoAsteroid = true;
+      x_asteroid = Math.floor(Math.random() * canvas.width);
       function desenharQ() {
         requestAnimationFrame(desenharQ);
         y_asteroid += fps;
